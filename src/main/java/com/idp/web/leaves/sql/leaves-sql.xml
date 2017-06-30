@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idp.web.leaves.dao.LeavesDao">
+
+	<parameterMap id="parameterMap" type="com.idp.web.leaves.entity.Leaves"></parameterMap>
+	<resultMap id="resultMap" type="com.idp.web.leaves.entity.Leaves">
+		<result property="id" column="id"/>
+		<result property="courseId" column="course_id"/>
+		<result property="courseName" column="course_name"/>
+		<result property="userId" column="user_id"/>
+		<result property="userName" column="user_name"/>
+		<result property="leaveTime" column="leave_time"/>
+		<result property="leaveNo" column="leave_no"/>
+		<result property="reason" column="reason"/>
+		<result property="leaveStatus" column="leave_status"/>
+		<result property="createUser" column="create_user"/>
+		<result property="createDate" column="create_date"/>
+		<result property="updateUser" column="update_user"/>
+		<result property="updateDate" column="update_date"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.course_id,
+			t.course_name,
+			t.user_id,
+			t.user_name,
+			t.leave_time,
+			t.leave_no,
+			t.reason,
+			t.leave_status,
+			t.create_user,
+			t.create_date,
+			t.update_user,
+			t.update_date,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from leaves t
+		<where>
+			<if test="courseId != null and courseId != ''">
+				and t.course_id = #{courseId}			
+			</if>
+			<if test="userId != null and userId != ''">
+				and t.user_id = #{userId}			
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from leaves t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into leaves
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			course_id,
+			course_name,
+			user_id,
+			user_name,
+			leave_time,
+			leave_no,
+			reason,
+			leave_status,
+			create_user,
+			create_date,
+			update_user,
+			update_date,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{courseId},
+			#{courseName},
+			#{userId},
+			#{userName},
+			#{leaveTime},
+			#{leaveNo},
+			#{reason},
+			#{leaveStatus},
+			#{createUser},
+			#{createDate},
+			#{updateUser},
+			#{updateDate},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into leaves
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			course_id,
+			course_name,
+			user_id,
+			user_name,
+			leave_time,
+			leave_no,
+			reason,
+			leave_status,
+			create_user,
+			create_date,
+			update_user,
+			update_date,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.courseId},
+				#{item.courseName},
+				#{item.userId},
+				#{item.userName},
+				#{item.leaveTime},
+				#{item.leaveNo},
+				#{item.reason},
+				#{item.leaveStatus},
+				#{item.createUser},
+				#{item.createDate},
+				#{item.updateUser},
+				#{item.updateDate},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update leaves
+		<set>
+			course_id = #{courseId},
+			course_name = #{courseName},
+			user_id = #{userId},
+			user_name = #{userName},
+			leave_time = #{leaveTime},
+			leave_no = #{leaveNo},
+			reason = #{reason},
+			leave_status = #{leaveStatus},
+			create_user = #{createUser},
+			create_date = #{createDate},
+			update_user = #{updateUser},
+			update_date = #{updateDate},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update leaves
+		<set>
+			<if test="courseId != null">
+			course_id = #{courseId},
+			</if>
+			<if test="courseName != null">
+			course_name = #{courseName},
+			</if>
+			<if test="userId != null">
+			user_id = #{userId},
+			</if>
+			<if test="userName != null">
+			user_name = #{userName},
+			</if>
+			<if test="leaveTime != null">
+			leave_time = #{leaveTime},
+			</if>
+			<if test="leaveNo != null">
+			leave_no = #{leaveNo},
+			</if>
+			<if test="reason != null">
+			reason = #{reason},
+			</if>
+			<if test="leaveStatus != null">
+			leave_status = #{leaveStatus},
+			</if>
+			<if test="createUser != null">
+			create_user = #{createUser},
+			</if>
+			<if test="createDate != null">
+			create_date = #{createDate},
+			</if>
+			<if test="updateUser != null">
+			update_user = #{updateUser},
+			</if>
+			<if test="updateDate != null">
+			update_date = #{updateDate},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from leaves where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from leaves where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

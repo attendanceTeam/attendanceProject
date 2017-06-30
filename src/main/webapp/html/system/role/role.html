@@ -1,0 +1,76 @@
+<div ng-controller="roleCtrl"><h3 class="page-title">角色管理</h3>
+			<div class="page-bar">
+				<ul class="page-breadcrumb content-header">
+					<li><i class="fa fa-home"></i></li>
+					<li>
+						<span>角色管理界面</span>
+					</li>
+				</ul>
+			</div>
+			<div class="row content-panel"></div>
+
+			
+			<div class="col-md-12">
+	<div class="panel-search">
+	  <form class="form-inline" action="/sysRole/list">
+	    <div class="form-group">
+	      <label class="control-label">角色名称：</label>
+	      <input type="text" class="form-control" name="roleName">
+	    </div>
+	  </form>
+	  <div class="btn-div">
+			<div class="div-left" >
+			<!-- <div ng-controller="roleCtrl"> --> 
+				<button type="button" class="btn btn-warning" ng-click="roleadd()">  
+					<i class="fa fa-plus"></i>
+				</button>
+			</div>
+			<!-- </div> -->
+			<div class="div-right">
+				<button type="button" class="btn btn-primary" onclick="search()">
+					<i class="fa fa-search"></i>
+				</button>
+			
+		    <button type="button" class="btn btn-default" onclick="reset()">
+		    	<i class="fa fa-repeat"></i>
+		    </button>
+			</div>
+		</div>
+	</div>
+	<div class="panel-content"></div>
+</div>
+
+		
+	<div class="table-scrollable">
+	<table class="table table-striped table-hover table-success">
+		<thead>
+			<tr>
+				
+				<th>角色编码</th>
+				<th>角色名称</th>
+				<th>备注</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+
+		<tbody ng-repeat="items in page.result">
+			<tr>
+			
+				<td>{{items.roleCode}}</td>
+				<td>{{items.roleName}}</td>
+				<td>{{items.description}}</td>
+				<td>
+					<a href="javascript:;" class="btn btn-sm blue" ng-click="update(items)">	
+						<i class="fa fa-edit"></i>编辑
+					</a>
+					<a href="javascript:;"  class="btn btn-sm red" ng-click="del(items,$event)">
+						<i class="fa fa-trash"></i>删除
+					</a>
+				</div>
+				</td>
+			</tr>
+			<!-- </c:forEach> -->
+		</tbody>
+	</table>
+</div>
+</div>		

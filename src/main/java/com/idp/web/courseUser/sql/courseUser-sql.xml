@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idp.web.courseUser.dao.CourseUserDao">
+
+	<parameterMap id="parameterMap" type="com.idp.web.courseUser.entity.CourseUser"></parameterMap>
+	<resultMap id="resultMap" type="com.idp.web.courseUser.entity.CourseUser">
+		<result property="id" column="id"/>
+		<result property="useId" column="use_id"/>
+		<result property="courseId" column="course_id"/>
+		<result property="roleId" column="role_id"/>
+		<result property="createUser" column="create_user"/>
+		<result property="createDate" column="create_date"/>
+		<result property="updateUser" column="update_user"/>
+		<result property="updateDate" column="update_date"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.use_id,
+			t.course_id,
+			t.role_id,
+			t.create_user,
+			t.create_date,
+			t.update_user,
+			t.update_date,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from course_user t
+		<where>
+			<if test="useId != null and useId != ''">
+				and t.use_id = #{useId}			
+			</if>
+			<if test="roleId != null and roleId != ''">
+				and t.role_id = #{roleId}
+			</if>
+			<if test="courseId != null and courseId != ''">
+				and t.course_id = #{courseId}
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from course_user t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into course_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			use_id,
+			course_id,
+			role_id,
+			create_user,
+			create_date,
+			update_user,
+			update_date,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{useId},
+			#{courseId},
+			#{roleId},
+			#{createUser},
+			#{createDate},
+			#{updateUser},
+			#{updateDate},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into course_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			use_id,
+			course_id,
+			role_id,
+			create_user,
+			create_date,
+			update_user,
+			update_date,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.useId},
+				#{item.courseId},
+				#{item.roleId},
+				#{item.createUser},
+				#{item.createDate},
+				#{item.updateUser},
+				#{item.updateDate},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update course_user
+		<set>
+			use_id = #{useId},
+			course_id = #{courseId},
+			role_id = #{roleId},
+			create_user = #{createUser},
+			create_date = #{createDate},
+			update_user = #{updateUser},
+			update_date = #{updateDate},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update course_user
+		<set>
+			<if test="useId != null">
+			use_id = #{useId},
+			</if>
+			<if test="courseId != null">
+			course_id = #{courseId},
+			</if>
+			<if test="roleId != null">
+			role_id = #{roleId},
+			</if>
+			<if test="createUser != null">
+			create_user = #{createUser},
+			</if>
+			<if test="createDate != null">
+			create_date = #{createDate},
+			</if>
+			<if test="updateUser != null">
+			update_user = #{updateUser},
+			</if>
+			<if test="updateDate != null">
+			update_date = #{updateDate},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from course_user where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from course_user where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

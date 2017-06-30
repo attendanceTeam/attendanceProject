@@ -1,0 +1,57 @@
+<div class="login" ng-controller="loginCtrl">
+	<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+	<div class="menu-toggler sidebar-toggler">
+	</div>
+	<!-- END SIDEBAR TOGGLER BUTTON -->	
+	<!-- BEGIN LOGO -->
+	<div class="logo">
+		<div style="margin-top: 6px;">
+			<span style="color: #fff;font-size: 24px;">A</span><span style="color: red;font-size: 24px;">ttentance</span>
+		</div>
+	</div>
+	<!-- END LOGO -->
+	<!-- BEGIN LOGIN -->
+	<div class="content">
+		<!-- BEGIN LOGIN FORM -->
+		<form id="loginForm" >
+			<h3 class="form-title">考勤系统</h3>
+			<div class="form-group">
+				<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+				<label class="control-label visible-ie8 visible-ie9">
+				用户名
+				</label>
+				<div class="input-icon right">
+					<i class="fa"></i>
+					<input class="form-control form-control-solid placeholder-no-fix" type="text" 
+						autocomplete="off" name="username" value="admin"
+						placeholder="用户名" ng-model="account" />
+						<!-- </spring:message>"required title="<spring:message code="login.msg.username"></spring:message>"/> -->
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label visible-ie8 visible-ie9">
+					密码
+					<!-- <spring:message code="login.label.password"></spring:message>閿涳拷 -->
+				</label>
+				<div class="input-icon right">
+					<i class="fa"></i>
+					<input class="form-control form-control-solid placeholder-no-fix" type="password" 
+						autocomplete="off" name="password" value="123456"
+						placeholder="密码" ng-model="password" />
+						<!-- </spring:message>"required title="<spring:message code="login.msg.password"></spring:message>"/> -->
+				</div>
+			</div>
+			<div class="form-actions" style="background-color: #eceef1;text-align: center;">
+				<button type="button" id="loginBtn" ng-click="login()" class="btn btn-success uppercase">
+					<!-- <spring:message code="login.btn.login"></spring:message> -->
+					登录
+				</button>
+			</div>
+			
+		</form>
+		<!-- END LOGIN FORM -->
+	</div>
+	<div class="copyright">
+	 2017@
+	</div>
+</div>

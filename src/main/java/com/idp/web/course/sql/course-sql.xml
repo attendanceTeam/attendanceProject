@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idp.web.course.dao.CourseDao">
+
+	<parameterMap id="parameterMap" type="com.idp.web.course.entity.Course"></parameterMap>
+	<resultMap id="resultMap" type="com.idp.web.course.entity.Course">
+		<result property="id" column="id"/>
+		<result property="orgId" column="org_id"/>
+		<result property="orgName" column="org_name"/>
+		<result property="courseName" column="course_name"/>
+		<result property="courseTime" column="course_time"/>
+		<result property="courseNumber" column="course_number"/>
+		<result property="courseCount" column="course_count"/>
+		<result property="classRaw" column="class_raw"/>
+		<result property="classLie" column="class_lie"/>
+		<result property="courseInfo" column="course_info"/>
+		<result property="createUser" column="create_user"/>
+		<result property="createDate" column="create_date"/>
+		<result property="updateUser" column="update_user"/>
+		<result property="updateDate" column="update_date"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.org_id,
+			t.org_name,
+			t.course_name,
+			t.course_time,
+			t.course_number,
+			t.course_count,
+			t.class_raw,
+			t.class_lie,
+			t.course_info,
+			t.create_user,
+			t.create_date,
+			t.update_user,
+			t.update_date,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from course t
+		<where>
+			<if test="courseName != null and courseName != ''">
+				and t.course_name = #{courseName}			
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from course t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into course
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			org_id,
+			org_name,
+			course_name,
+			course_time,
+			course_number,
+			course_count,
+			class_raw,
+			class_lie,
+			course_info,
+			create_user,
+			create_date,
+			update_user,
+			update_date,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{orgId},
+			#{orgName},
+			#{courseName},
+			#{courseTime},
+			#{courseNumber},
+			#{courseCount},
+			#{classRaw},
+			#{classLie},
+			#{courseInfo},
+			#{createUser},
+			#{createDate},
+			#{updateUser},
+			#{updateDate},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into course
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			org_id,
+			org_name,
+			course_name,
+			course_time,
+			course_number,
+			course_count,
+			class_raw,
+			class_lie,
+			course_info,
+			create_user,
+			create_date,
+			update_user,
+			update_date,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.orgId},
+				#{item.orgName},
+				#{item.courseName},
+				#{item.courseTime},
+				#{item.courseNumber},
+				#{item.courseCount},
+				#{item.classRaw},
+				#{item.classLie},
+				#{item.courseInfo},
+				#{item.createUser},
+				#{item.createDate},
+				#{item.updateUser},
+				#{item.updateDate},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update course
+		<set>
+			org_id = #{orgId},
+			org_name = #{orgName},
+			course_name = #{courseName},
+			course_time = #{courseTime},
+			course_number = #{courseNumber},
+			course_count = #{courseCount},
+			class_raw = #{classRaw},
+			class_lie = #{classLie},
+			course_info = #{courseInfo},
+			create_user = #{createUser},
+			create_date = #{createDate},
+			update_user = #{updateUser},
+			update_date = #{updateDate},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update course
+		<set>
+			<if test="orgId != null">
+			org_id = #{orgId},
+			</if>
+			<if test="orgName != null">
+			org_name = #{orgName},
+			</if>
+		
+			<if test="courseName != null">
+			course_name = #{courseName},
+			</if>
+			<if test="courseTime != null">
+			course_time = #{courseTime},
+			</if>
+			<if test="courseNumber != null">
+			course_number = #{courseNumber},
+			</if>
+			<if test="courseCount != null">
+			course_count = #{courseCount},
+			</if>
+			<if test="classRaw != null">
+			class_raw = #{classRaw},
+			</if>
+			<if test="classLie != null">
+			class_lie = #{classLie},
+			</if>
+			<if test="courseInfo != null">
+			course_info = #{courseInfo},
+			</if>
+			<if test="createUser != null">
+			create_user = #{createUser},
+			</if>
+			<if test="createDate != null">
+			create_date = #{createDate},
+			</if>
+			<if test="updateUser != null">
+			update_user = #{updateUser},
+			</if>
+			<if test="updateDate != null">
+			update_date = #{updateDate},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from course where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from course where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

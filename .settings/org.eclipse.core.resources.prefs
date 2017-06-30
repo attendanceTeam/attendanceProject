@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//src/main/resources/dbconfig.properties=UTF-8
+encoding//src/main/resources/log4j.properties=UTF-8
+encoding//src/main/resources/messages_en.properties=UTF-8
+encoding//src/main/resources/messages_zh_CN.properties=UTF-8
+encoding//src/main/resources/sysconfig.properties=UTF-8
+encoding//src/main/webapp/html/course/class.html=UTF-8
+encoding//src/main/webapp/html/course/course.html=UTF-8
+encoding//src/test/java=UTF-8
+encoding/<project>=UTF-8

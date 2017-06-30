@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idp.web.attendance.dao.AttendanceDao">
+
+	<parameterMap id="parameterMap" type="com.idp.web.attendance.entity.Attendance"></parameterMap>
+	<resultMap id="resultMap" type="com.idp.web.attendance.entity.Attendance">
+		<result property="id" column="id"/>
+		<result property="studentId" column="student_id"/>
+		<result property="studentName" column="student_name"/>
+		<result property="courseId" column="course_id"/>
+		<result property="courseName" column="course_name"/>
+		<result property="attendanceNo" column="attendance_no"/>
+		<result property="row" column="row"/>
+		<result property="lie" column="lie"/>
+		<result property="attendanceStatus" column="attendance_status"/>
+		<result property="attendanceTime" column="attendance_time"/>
+		<result property="info" column="info"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.student_id,
+			t.student_name,
+			t.course_id,
+			t.course_name,
+			t.attendance_no,
+			t.row,
+			t.lie,
+			t.attendance_status,
+			t.attendance_time,
+			t.info,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from attendance t
+		<where>
+			<if test="studentId != null and studentId != ''">
+				and t.student_id = #{studentId}			
+			</if>
+			<if test="courseId != null and courseId != ''">
+				and t.course_id = #{courseId}			
+			</if>
+			<if test="attendanceNo != null and attendanceNo != ''">
+				and t.attendance_no = #{attendanceNo}			
+			</if>
+			<if test="attendanceStatus != null and attendanceStatus != ''">
+				and t.attendance_status = #{attendanceStatus}			
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from attendance t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into attendance
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			student_id,
+			student_name,
+			course_id,
+			course_name,
+			attendance_no,
+			row,
+			lie,
+			attendance_status,
+			attendance_time,
+			info,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{studentId},
+			#{studentName},
+			#{courseId},
+			#{courseName},
+			#{attendanceNo},
+			#{row},
+			#{lie},
+			#{attendanceStatus},
+			#{attendanceTime},
+			#{info},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into attendance
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			student_id,
+			student_name,
+			course_id,
+			course_name,
+			attendance_no,
+			row,
+			lie,
+			attendance_status,
+			attendance_time,
+			info,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.studentId},
+				#{item.studentName},
+				#{item.courseId},
+				#{item.courseName},
+				#{item.attendanceNo},
+				#{item.row},
+				#{item.lie},
+				#{item.attendanceStatus},
+				#{item.attendanceTime},
+				#{item.info},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update attendance
+		<set>
+			student_id = #{studentId},
+			student_name = #{studentName},
+			course_id = #{courseId},
+			course_name = #{courseName},
+			attendance_no = #{attendanceNo},
+			row = #{row},
+			lie = #{lie},
+			attendance_status = #{attendanceStatus},
+			attendance_time = #{attendanceTime},
+			info = #{info},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update attendance
+		<set>
+			<if test="studentId != null">
+			student_id = #{studentId},
+			</if>
+			<if test="studentName != null">
+			student_name = #{studentName},
+			</if>
+			<if test="courseId != null">
+			course_id = #{courseId},
+			</if>
+			<if test="courseName != null">
+			course_name = #{courseName},
+			</if>
+			<if test="attendanceNo != null">
+			attendance_no = #{attendanceNo},
+			</if>
+			<if test="row != null">
+			row = #{row},
+			</if>
+			<if test="lie != null">
+			lie = #{lie},
+			</if>
+			<if test="attendanceStatus != null">
+			attendance_status = #{attendanceStatus},
+			</if>
+			<if test="attendanceTime != null">
+			attendance_time = #{attendanceTime},
+			</if>
+			<if test="info != null">
+			info = #{info},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from attendance where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from attendance where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

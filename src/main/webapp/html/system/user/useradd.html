@@ -1,0 +1,131 @@
+<div ng-controller="useraddCtrl">
+	<div class="portlet box green">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="fa fa-gift"></i>用户添加
+		</div>
+  	</div>
+	<div class="portlet-body form">
+	  	<form id="userForm" class="form-horizontal form-bordered" action="/user/save" method="post" >
+	  		<div class="form-group">
+	        <label class="col-md-3 control-label">账户:</label>
+	        <div class="col-md-4">
+	        	<div class="input-icon right">
+		        	<i class="fa"></i>
+		          <input type="text" class="form-control" name="username" ng-model="sysPro.username" required maxlength="50"/>
+		        </div>
+	        </div>
+	      </div>
+	        <div class="form-group">
+	        <label class="col-md-3 control-label">性别:</label>
+	        <div class="col-md-4">
+	        	<div class="input-icon right">
+		        	<i class="fa"></i>
+		       		<input type="text" class="form-control" name="sex" ng-model="sysPro.sex" required  maxlength="50"/>
+		        </div>
+	        </div>
+	      </div>
+	        <div class="form-group">
+	        <label class="col-md-3 control-label">学号:</label>
+	        <div class="col-md-4">
+	        	<div class="input-icon right">
+		        	<i class="fa"></i>
+		       		<input type="text" class="form-control" name="orgNumber" ng-model="sysPro.orgNumber" required  maxlength="50"/>
+		        </div>
+	        </div>
+	      </div>
+	  		<div class="form-group">
+	        <label class="col-md-3 control-label">密码:</label>
+	        <div class="col-md-4">
+	        	<div class="input-icon right">
+		        	<i class="fa"></i>
+		          <input type="text" class="form-control" name="password" ng-model="sysPro.password" required  maxlength="50"/>
+		        </div>
+	        </div>
+	      </div>
+	  		<div class="form-group">
+	        <label class="col-md-3 control-label">姓名:</label>
+	        <div class="col-md-4">
+	        	<div class="input-icon right">
+		        	<i class="fa"></i>
+		          <input type="text" class="form-control" name="name" ng-model="sysPro.name" required maxlength="50"/>
+		        </div>
+	        </div>
+	      </div>
+	  		<div class="form-group">
+	        <label class="col-md-3 control-label">学校:</label>
+	        <div class="col-md-4">
+	        	<div class="input-icon right">
+		        	<i class="fa"></i>
+		       <!--     <input type="hidden" id="orgId" name="orgId" value="user.orgId"/>-->
+		         <!-- onclick="showOrg() --> 
+		          <input type="text" class="form-control" name="orgId" ng-model="sysPro.orgId" required  maxlength="50" >
+		        </div>
+	        </div>
+	      </div>
+	
+	      <div class="form-group">
+	        <label class="col-md-3 control-label">角色:</label>
+	        <div class="col-md-4">
+	        	<div class="input-icon right">
+		        	<i class="fa"></i>
+		        	<select class="form-control select2" ng-model="roleNmae" style="padding: 0;">
+		        		<option ng-repeat="index in roleList" >{{index.roleName}}</option>
+		        	</select>
+		        </div>
+	        </div>
+	      </div>
+
+<!-- 	      	<div class="form-group">
+	        <label class="col-md-3 control-label">角色编号:</label>
+	        <div class="col-md-4">
+	        	<div class="input-icon right">
+		        	<i class="fa"></i>
+		          <select ng-model="org.parentOrg"> 
+		        		<option id='items.id' ng-repeat="items in parentOrg">{{items.name}}</option>
+		        	</select>
+		        </div>
+	        </div>
+	      </div> -->
+
+	  		<div class="form-group">
+	        <label class="col-md-3 control-label">电话:</label>
+	        <div class="col-md-4">
+	        	<div class="input-icon right">
+		        	<i class="fa"></i>
+		          <input type="text" class="form-control" name="phone"  ng-model="sysPro.phone"  maxlength="11"/>
+		        </div>
+	        </div>
+	      </div>
+	  		<div class="form-group">
+	        <label class="col-md-3 control-label">邮箱:</label>
+	        <div class="col-md-4">
+	        	<div class="input-icon right">
+		        	<i class="fa"></i>
+		          <input type="text" class="form-control" name="email" ng-model="sysPro.email"  maxlength="50"/>
+		        </div>
+	        </div>
+	      </div>
+	  		<div class="form-group">
+	        <label class="col-md-3 control-label">描述:</label>
+	        <div class="col-md-4">
+	        	<div class="input-icon right">
+		        	<i class="fa"></i>
+		        	<textarea rows="5" class="form-control" name= "description" ng-model="sysPro.description" maxlength="255"></textarea>
+		        </div>
+	        </div>
+	      </div>
+	      <div class="form-actions">
+	        <div class="col-md-9 col-md-offset-3">
+	          <button type="button" class="btn btn-primary" ng-click="save()">
+	          	保存
+	          </button>
+	          <button type="reset" class="btn btn-default" ng-click="cancel()">
+	          	取消
+	          </button>
+	        </div>
+	      </div>
+	  	</form>
+	  </div>
+	</div>
+</div>	

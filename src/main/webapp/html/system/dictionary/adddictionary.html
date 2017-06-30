@@ -1,0 +1,126 @@
+<div ng-controller="addDicionaryCtrl">
+	<h3 class="page-title">数据字典</h3>
+	<div class="page-bar">
+		<ul class="page-breadcrumb content-header">
+			<li><i class="fa fa-home"></i></li>
+			<li>
+				<span>系统管理>数据字典</span>
+			</li>
+		</ul>
+	</div>
+	<div class="portlet box green">
+		<div class="portlet-title">
+			<div class="caption">
+				<i class="fa fa-gift"></i>数据字典
+			</div>
+	  </div>
+	  <div class="portlet-body form">
+	  	<form id="sysDictionaryForm" class="form-horizontal form-bordered" action="/sysDictionary/save" method="post">
+	  		<div class="form-group">
+	        <label class="col-md-3 control-label">分组编码:</label>
+	        <div class="col-md-4">
+	        	<div class="input-icon right">
+		        	<i class="fa"></i>
+		          <input type="text" class="form-control" name="code" ng-model="sysDictionary.code"  maxlength="50" required/>
+		        </div>
+	        </div>
+	      </div>
+	  		<div class="form-group">
+	        <label class="col-md-3 control-label">分组名称:</label>
+	        <div class="col-md-4">
+	        	<div class="input-icon right">
+		        	<i class="fa"></i>
+		          <input type="text" class="form-control" name="name" ng-model="sysDictionary.name"  maxlength="50" required/>
+		        </div>
+	        </div>
+	      </div>
+	      <div style="padding: 10px;">
+	      	<button type="button" class="btn btn-warning" ng-click="addItem()">
+						<i class="fa fa-plus"></i> 添加子项
+					</button>
+	      </div>
+	      <div class="table-scrollable">
+	      <table id="childrenTable" class="table table-striped table-hover">
+	      	<thead>
+	      		<tr style="background-color: #ddd;">
+	      			<th></th>
+		      		<th>编码</th>
+		      		<th>名称</th>
+		      		<th>排序</th>
+	      		</tr>
+	      	</thead>
+	      	<tbody  ng-repeat="items in sysDictionary.children">
+	      		<!-- <c:forEach items="${sysDictionary.children}" var="child" varStatus="vs"> -->
+	      			<tr>
+	      				<td class="text-center">
+	      					<a class="btn btn-icon-only red" href="javascript:;" ng-click="removeItem($event)">
+	      						<i class="fa fa-trash"></i>
+	      					</a>
+	      				</td>
+	      				<td>
+	      					<div class="input-icon right">
+	      						<i class="fa"></i>
+	      						<input type="text" name="items.code" class="form-control" ng-model="items.code" required/>
+	      					</div>
+	      				</td>
+	      				<td>
+	      					<div class="input-icon right">
+	      						<i class="fa"></i>
+	      						<input type="text" name="items.name" class="form-control"  ng-model="items.name" required/>
+	      					</div>
+	      				</td>
+	      				<td>
+	      					<div class="input-icon right">
+	      						<i class="fa"></i>
+	      						<input type="text" name="items.sort" class="form-control" ng-model="items.sort" required/>
+	      					</div>
+	      				</td>
+	      			</tr>
+	      		<!-- </c:forEach> -->
+	      	</tbody>
+	      </table>
+	      </div>
+	      <div class="form-actions">
+	        <div class="col-md-9 col-md-offset-3">
+	          <button type="button" class="btn btn-primary" ng-click="save()">
+	          	保存
+	          </button>
+	          <button type="reset" class="btn btn-default" ng-click="cancel()">
+	          	取消
+	          </button>
+	        </div>
+	      </div>
+	      <input type="hidden" name="id" value="${sysDictionary.id}">
+	  	</form>
+	  	<div style="display: none;">
+	  		<table id="trTemplate">
+	  			<tr class="addtr">
+	  				<td class="text-center">
+	   					<a class="btn btn-icon-only red" href="javascript:;" ng-click="removeItem($event)">
+	   						<i class="fa fa-trash"></i>
+	   					</a>
+	   				</td>
+	  				<td>
+	  					<div class="input-icon right">
+	  						<i class="fa"></i>
+	  						<input type="text" name="children[#index#].code" class="form-control" required/>
+	  					</div>
+	  				</td>
+	  				<td>
+	  					<div class="input-icon right">
+	  						<i class="fa"></i>
+	  						<input type="text" name="children[#index#].name" class="form-control" required/>
+	  					</div>
+	  				</td>
+	  				<td>
+	  					<div class="input-icon right">
+	  						<i class="fa"></i>
+	  						<input type="text" name="children[#index#].sort" class="form-control" required/>
+	  					</div>
+	  				</td>
+	  			</tr>
+	  		</table>
+	  	</div>
+	  </div>
+	</div>
+</div>

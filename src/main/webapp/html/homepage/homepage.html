@@ -1,0 +1,78 @@
+<div ng-controller="homepageCtrl" class="page-header-fixed page-quick-sidebar-over-content">
+	<!-- BEGIN HEADER -->
+	<div class="page-header navbar navbar-fixed-top">
+	<!-- BEGIN HEADER INNER -->
+		<div class="page-header-inner">
+			<!-- BEGIN LOGO -->
+			<div class="page-logo">
+				<div style="margin-top: 6px;">
+					<span style="color: #fff;font-size: 24px;">Attendance</span><span style="color: red;font-size: 24px;">System</span>
+				</div>
+				
+				<div class="menu-toggler sidebar-toggler hide">
+				</div>
+			</div>
+			<!-- END LOGO -->
+			<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+			<a href="" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+			</a>
+			<!-- END RESPONSIVE MENU TOGGLER -->
+			<!-- BEGIN TOP NAVIGATION MENU -->
+			<div class="top-menu">
+				<ul class="nav navbar-nav pull-right">
+					<!-- BEGIN NOTIFICATION DROPDOWN -->
+					<li class="dropdown dropdown-user">
+						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+						<img alt="" class="img-circle" />
+						<span class="username username-hide-on-mobile">欢迎您！{{loginInfo.username}}</span>
+						</a>
+					</li>
+					<!-- END USER LOGIN DROPDOWN -->
+					<li class="dropdown dropdown-quick-sidebar-toggler">
+						<a ui-sref="login" class="dropdown-toggle">
+						<i class="icon-logout"></i>
+						</a>
+					</li>
+					<!-- END QUICK SIDEBAR TOGGLER -->
+				</ul>
+			</div>
+		<!-- END TOP NAVIGATION MENU -->
+	</div>
+	<!-- END HEADER INNER -->
+	</div>
+	<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+	<div class="page-container">
+	<!-- BEGIN SIDEBAR -->
+	<div class="page-sidebar-wrapper">
+		<div class="page-sidebar navbar-collapse collapse">
+			<!-- BEGIN SIDEBAR MENU -->
+			<ul id="menusiderbar" class="page-sidebar-menu "></ul>
+			<!-- END SIDEBAR MENU -->
+			
+		</div>
+	</div>
+	<!-- BEGIN CONTENT -->
+	<div class="page-content-wrapper">
+		<div class="page-content">
+			<div ui-view></div>
+		</div>
+	</div>
+	<!-- END CONTENT -->
+</div>
+<!-- END CONTAINER -->
+<!-- BEGIN FOOTER -->
+	<div class="page-footer" >
+	<div class="page-footer-inner" style="text-align:center;width: 100%;">
+		2017 &copy; 
+	</div>
+	<div class="scroll-to-top">
+		<i class="icon-arrow-up"></i>
+	</div>
+</div>
+
+
+<!-- END FOOTER -->	
+</div>
+
+	

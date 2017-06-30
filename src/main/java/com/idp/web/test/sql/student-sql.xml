@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idp.web.test.dao.StudentDao">
+
+	<parameterMap id="parameterMap" type="com.idp.web.test.entity.Student"></parameterMap>
+	<resultMap id="resultMap" type="com.idp.web.test.entity.Student">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="age" column="age"/>
+		<result property="phone" column="phone"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.name,
+			t.age,
+			t.phone,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from student t
+		<where>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.Integer" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from student t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into student
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			name,
+			age,
+			phone,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{name},
+			#{age},
+			#{phone},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into student
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			name,
+			age,
+			phone,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.name},
+				#{item.age},
+				#{item.phone},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update student
+		<set>
+			name = #{name},
+			age = #{age},
+			phone = #{phone},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update student
+		<set>
+			<if test="name != null">
+			name = #{name},
+			</if>
+			<if test="age != null">
+			age = #{age},
+			</if>
+			<if test="phone != null">
+			phone = #{phone},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from student where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from student where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>
